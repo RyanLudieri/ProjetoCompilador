@@ -2,6 +2,7 @@
     #include "sintatico.h"
     int yyerror(char *);
     int numLinha = 1;
+    char atomo[100];
 %}
 
 identificador [a-zA-Z]([a-zA-Z0-9])*
@@ -13,7 +14,7 @@ novalinha    [\n]
 
 %%
 programa          return T_PROGRAMA;
-incio             return T_INICIO;
+inicio            return T_INICIO;
 fimprograma       return T_FIM;
 leia              return T_LEIA;
 escreva           return T_ESCREVA;
@@ -48,8 +49,8 @@ F                 return T_F;
 <coment>.         /*nada*/
 <coment>\n        numLinha++;
 
-{identificador}          return T_IDENTIF;
-{numero}          return T_NUMERO;
+{identificador}   { strcpy(atomo, yytext); return T_IDENTIF; }
+{numero}          { strcpy(atomo, yytext); return T_NUMERO; }
 {espaco}          /* nada */
 {novalinha}       numLinha++;
 .                 yyerror("lexico!");
