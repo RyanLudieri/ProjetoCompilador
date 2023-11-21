@@ -74,4 +74,14 @@ int desempilha(void){
     return pilha[topo--];
 }
 
+//tipo1 e tipo2 são os tipos esperados na expressão
+//ret é o tipo que será empilhado como resultado da expressão
+void testaTipo(int tipo1, int tipo2, int ret){
+    int t1 = desempilha();
+    int t2 = desempilha();
+    if(t1 != tipo1 || t2 != tipo2)
+        yyerror("Incompatibilidade de tipo !");
+    empilha(ret);
+}
+
 
