@@ -2,10 +2,18 @@
 
 enum{
     INT, 
-    LOG
+    LOG,
+    REG
 };
 
+char nomeTipo[3][4] = {"INT","LOG","REG"};
+
+//criar uma estrutura e operações para manipular uma lista de campos
+
 #define TAM_TAB 100
+
+// acrescentar campos na tabela TAM|POS|CAMPOS Cada variavel dentro da struct gera um campo.
+
 struct elemTabSimbolos{
     char id[100]; // nome do identificador
     int end; // endereço
@@ -53,7 +61,8 @@ void mostraTab(){
         printf("\n%30s | %3d | %s", 
              tabSimb[i].id, 
              tabSimb[i].end, 
-             tabSimb[i].tip == INT ? "INT" : "LOG");
+             nomeTipo[tabSimb[i].tip]
+             );
     puts("");
 }
 

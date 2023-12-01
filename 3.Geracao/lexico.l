@@ -24,7 +24,9 @@ senao             return T_SENAO;
 fimse             return T_FIMSE;
 enquanto          return T_ENQUANTO;
 faca              return T_FACA;
-fimenquanto       return T_FIMENQTO;   
+fimenquanto       return T_FIMENQTO;
+def               return T_DEF;
+fimdef            return T_FIMDEF;   
 "+"               return T_MAIS;
 "-"               return T_MENOS;
 "*"               return T_VEZES;
@@ -40,6 +42,7 @@ nao               return T_NAO;
 ")"               return T_FECHA;
 inteiro           return T_INTEIRO;
 logico            return T_LOGICO;
+registro          return T_REGISTRO; 
 V                 return T_V;
 F                 return T_F;
 
@@ -50,6 +53,11 @@ F                 return T_F;
 <coment>\n        numLinha++;
 
 {identificador}   { strcpy(atomo, yytext); return T_IDENTIF; }
+{identificador}"."  { 
+                        strcpy(atomo, yytext);
+                        atomo[strlen(atomo)-1] = 0 ;
+                        return T_IDPONTO; 
+                    }
 {numero}          { strcpy(atomo, yytext); return T_NUMERO; }
 {espaco}          /* nada */
 {novalinha}       numLinha++;
